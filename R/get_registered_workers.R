@@ -1,20 +1,26 @@
-#' Get traccar sql data
+#' Get registered workers
 #'
-#' Retrieve traccar data stored in a sql database
-#' @param database_name The name of your database
-#' @param database_host_ip The host ip address of your database
+#' Retrieve registered workers from the database associated wtih the shiny app
+#' This is NOT part of the traccar suite of tools
+#' @param dbname The name of your database
+#' @param host The host ip address of your database
 #' @param user The username for your database
-#' @param password The password for your database
+#' @param pass The password for your database
 #' @param port The port number for yourdatabse
 #' @return A dataframe
 #' @export
 #' @import dplyr
-#' @import httr
+#' @import DBI
+#' @import RMySQL
 
-get_traccar_sql_data <- function(database_name, database_host_ip, user, password, port){
+get_registered_workers <- function(dbname, 
+                                 host, 
+                                 user, 
+                                 pass, 
+                                 port = 3306){
   # Example to connect to database:
-  creds <- list(dbname = database_name,
-                host = database_host_ip,
+  creds <- list(dbname = dbname,
+                host = host,
                 user = user,
                 pass = pass)
 

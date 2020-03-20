@@ -4,13 +4,15 @@
 #' @param user The username for your traccar database
 #' @param password The password for your traccar database
 #' @param url The url of your traccar server
+#' @param path API path
 #' @return A dataframe
 #' @export
 #' @import dplyr
 #' @import httr
+#' @import tidyr
 
-get_traccar_data <- function(url, user, traccar_pass){
-  r <- GET(url = traccar_url, authenticate(traccar_user, traccar_pass))
+get_traccar_data <- function(url, user, pass, path = 'api/devices/'){
+  r <- GET(url = url, path = path, authenticate(user, pass))
   output <- content(r)
   values <- unlist(output)
   keys <- names(values)
